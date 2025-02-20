@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const CustomHook = () => {
+const CustomHook = (url) => {
 	const [product, setProduct] = useState([]);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -8,7 +8,7 @@ const CustomHook = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const data = await fetch("https://api.escuelajs.co/api/v1/products");
+				const data = await fetch(url);
 				const response = await data.json();
 				setProduct(response);
 			} catch (error) {
@@ -22,7 +22,7 @@ const CustomHook = () => {
 		}, 1000);
 
 		return clearTimeout();
-	}, []);
+	}, [url]);
 
 	return [product, error, loading];
 };
